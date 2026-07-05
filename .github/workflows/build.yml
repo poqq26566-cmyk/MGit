@@ -1,8 +1,6 @@
 name: Build
 
 on:
-  # Trigger the workflow on push or pull request,
-  # but only for the main branch
   push:
     branches:
       - master
@@ -21,3 +19,8 @@ jobs:
         java-version: 11
     - name: Build with Gradle
       run: ./gradlew --no-daemon clean assembleDebug testDebug
+    - name: Upload APK
+      uses: actions/upload-artifact@v4
+      with:
+        name: mgit-debug-apk
+        path: app/build/outputs/apk/debug/*.apk
