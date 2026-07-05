@@ -2,16 +2,23 @@ package me.sheimi.sgit.fragments;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.HorizontalScrollView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import me.sheimi.android.activities.SheimiFragmentActivity;
 import me.sheimi.android.activities.SheimiFragmentActivity.OnBackClickListener;
@@ -38,6 +45,9 @@ public class FilesFragment extends RepoDetailFragment {
 
     private Repo mRepo;
 
+    private HorizontalScrollView mBreadcrumbScroll;
+    private LinearLayout mBreadcrumbContainer;
+
     public static FilesFragment newInstance(Repo mRepo) {
         FilesFragment fragment = new FilesFragment();
         Bundle bundle = new Bundle();
@@ -63,6 +73,8 @@ public class FilesFragment extends RepoDetailFragment {
         mRootDir = mRepo.getDir();
 
         mFilesList = (ListView) v.findViewById(R.id.filesList);
+        mBreadcrumbScroll = (HorizontalScrollView) v.findViewById(R.id.breadcrumbScroll);
+        mBreadcrumbContainer = (LinearLayout) v.findViewById(R.id.breadcrumbContainer);
 
         mFilesListAdapter = new FilesListAdapter(getActivity(),
                 new FileFilter() {
