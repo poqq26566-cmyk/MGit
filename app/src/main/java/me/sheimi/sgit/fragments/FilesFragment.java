@@ -190,7 +190,6 @@ public class FilesFragment extends RepoDetailFragment {
             final File dirLevel = chain.get(i);
             boolean isLast = (i == chain.size() - 1);
             String label = dirLevel.equals(mRootDir) ? mRepo.getRepoName() : dirLevel.getName();
-
             TextView segment = new TextView(getActivity());
             segment.setText(label);
             segment.setPadding(dpToPx(6), dpToPx(4), dpToPx(6), dpToPx(4));
